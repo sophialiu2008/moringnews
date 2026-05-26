@@ -40,3 +40,34 @@
 2026-05-26 10:14:53 [INFO] a_stock_morning_brief - Server酱推送成功。
 2026-05-26 10:14:53 [INFO] a_stock_morning_brief - 微信推送结果：成功
 2026-05-26 10:14:53 [INFO] a_stock_morning_brief - 运行完成。简报路径：/home/runner/work/moringnews/moringnews/briefings/2026-05-26-A股盘前简报.md
+2026-05-26 12:57:25 [INFO] a_stock_morning_brief - 开始运行 A股每日盘前情报简报系统，日期：2026-05-26
+2026-05-26 12:57:25 [INFO] a_stock_morning_brief - 开始分阶段研究：收集盘前资料。
+2026-05-26 12:57:25 [INFO] a_stock_morning_brief - 调用阿里百炼模型：qwen-max，enable_search=True
+2026-05-26 12:58:07 [INFO] a_stock_morning_brief - 开始分阶段研究：过滤有效信号。
+2026-05-26 12:58:07 [INFO] a_stock_morning_brief - 调用阿里百炼模型：qwen-max，普通模式
+2026-05-26 12:58:49 [INFO] a_stock_morning_brief - 开始生成 A股盘前简报初稿。
+2026-05-26 12:58:49 [INFO] a_stock_morning_brief - 调用阿里百炼模型：qwen-max，enable_search=True
+2026-05-26 12:59:38 [INFO] a_stock_morning_brief - 开始执行可选 DeepSeek 二次优化。
+2026-05-26 12:59:38 [INFO] a_stock_morning_brief - 调用 DeepSeek 模型：deepseek-chat
+2026-05-26 12:59:40 [WARNING] a_stock_morning_brief - DeepSeek 二次优化失败，将使用阿里百炼初稿。错误：DeepSeek 模型调用失败：Connection error.
+2026-05-26 12:59:40 [WARNING] a_stock_morning_brief - 简报质量检查未通过：质量检查未通过：
+- 今日板块催化数量不足，当前 1 个，要求至少 5 个。
+
+检测指标：
+- sections: 9
+- global_market_rows: 8
+- sector_count: 1
+- missing_holdings: 0
+- source_count: 6
+- forbidden_words: 0
+2026-05-26 12:59:40 [INFO] a_stock_morning_brief - 开始自动修订简报质量，第 1 次。
+2026-05-26 12:59:40 [INFO] a_stock_morning_brief - 调用阿里百炼模型：qwen-max，普通模式
+2026-05-26 13:00:45 [INFO] a_stock_morning_brief - 自动修订后质量检查通过：{'sections': 9, 'global_market_rows': 8, 'sector_count': 5, 'missing_holdings': 0, 'source_count': 15, 'forbidden_words': 0}
+2026-05-26 13:00:45 [INFO] a_stock_morning_brief - 开始生成微信推送摘要。
+2026-05-26 13:00:45 [INFO] a_stock_morning_brief - 调用 DeepSeek 模型：deepseek-chat
+2026-05-26 13:00:46 [WARNING] a_stock_morning_brief - DeepSeek 微信摘要生成失败，将改用阿里百炼。错误：DeepSeek 模型调用失败：Connection error.
+2026-05-26 13:00:46 [INFO] a_stock_morning_brief - 调用阿里百炼模型：qwen-max，普通模式
+2026-05-26 13:00:59 [INFO] a_stock_morning_brief - 简报已保存：/home/runner/work/moringnews/moringnews/briefings/2026-05-26-A股盘前简报.md
+2026-05-26 13:01:01 [INFO] a_stock_morning_brief - Server酱推送成功。
+2026-05-26 13:01:01 [INFO] a_stock_morning_brief - 微信推送结果：成功
+2026-05-26 13:01:01 [INFO] a_stock_morning_brief - 运行完成。简报路径：/home/runner/work/moringnews/moringnews/briefings/2026-05-26-A股盘前简报.md
