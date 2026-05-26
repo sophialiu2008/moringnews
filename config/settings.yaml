@@ -16,8 +16,13 @@ search:
 
 brief:
   language: zh-CN
-  max_reading_minutes: 5
+  max_reading_minutes: 10
   filename_format: "{date}-A股盘前简报.md"
+
+generation:
+  primary_max_tokens: 6000
+  secondary_max_tokens: 6000
+  summary_max_tokens: 1800
 
 notification:
   enable_wechat: true

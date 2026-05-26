@@ -14,6 +14,7 @@
 - 自动生成 Markdown 文件到 `briefings/`
 - 自动记录运行日志到 `logs/`
 - 可选 Server酱 或 WxPusher 推送微信摘要
+- 默认生成 10 分钟可读的盘前简报，微信摘要控制在 1000 字以内
 - 支持本地手动运行和 GitHub Actions 手动触发
 - 可选接入 AKShare，本地行情失败不影响主流程
 

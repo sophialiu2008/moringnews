@@ -33,10 +33,12 @@ class BriefGenerator:
         date_text = now.strftime("%Y-%m-%d")
         time_text = now.strftime("%Y-%m-%d %H:%M:%S %Z")
         market_data = collect_optional_market_data(self.settings, self.watchlist)
+        max_reading_minutes = self.settings.get("brief", {}).get("max_reading_minutes", 10)
 
         return self.morning_template.format(
             date=date_text,
             time=time_text,
+            max_reading_minutes=max_reading_minutes,
             research_context=self.research_context,
             watchlist=json.dumps(self.watchlist, ensure_ascii=False, indent=2),
             sources=json.dumps(self.sources, ensure_ascii=False, indent=2),

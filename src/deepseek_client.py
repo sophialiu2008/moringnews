@@ -13,11 +13,13 @@ class DeepSeekClient:
         api_key: str | None = None,
         base_url: str = "https://api.deepseek.com",
         timeout: float = 120.0,
+        max_tokens: int | None = None,
     ) -> None:
         self.model = model
         self.api_key = api_key or os.getenv("DEEPSEEK_API_KEY")
         self.base_url = base_url
         self.timeout = timeout
+        self.max_tokens = max_tokens
         self.available = bool(self.api_key)
         self.logger = logging.getLogger("a_stock_morning_brief")
         self.client = (
@@ -29,18 +31,22 @@ class DeepSeekClient:
         if not self.available:
             self.logger.info("未配置 DEEPSEEK_API_KEY，将跳过 DeepSeek 二次分析。")
 
-    def chat(self, prompt: str, system_prompt: str | None = None) -> str:
+    def chat(self, prompt: str, system_prompt: str | None = None, max_tokens: int | None = None) -> str:
         if not self.available or self.client is None:
             raise RuntimeError("DeepSeek 未配置，无法调用。")
 
         messages = self._build_messages(prompt, system_prompt)
         try:
             self.logger.info("调用 DeepSeek 模型：%s", self.model)
-            response = self.client.chat.completions.create(
-                model=self.model,
-                messages=messages,
-                temperature=0.2,
-            )
+            kwargs = {
+                "model": self.model,
+                "messages": messages,
+                "temperature": 0.2,
+            }
+            token_limit = max_tokens or self.max_tokens
+            if token_limit:
+                kwargs["max_tokens"] = token_limit
+            response = self.client.chat.completions.create(**kwargs)
         except Exception as exc:
             raise RuntimeError(f"DeepSeek 模型调用失败：{exc}") from exc
 
