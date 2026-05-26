@@ -10,6 +10,8 @@
 - 阿里百炼 OpenAI 兼容模式调用，默认模型 `qwen-max`
 - 百炼主模型优先启用 `enable_search`
 - `enable_search` 失败时自动降级普通模型调用
+- 支持多阶段研究：资料收集、信号过滤、最终简报
+- 支持简报质量检查，不达标时自动修订一次
 - DeepSeek 可选二次优化，默认模型 `deepseek-chat`
 - 自动生成 Markdown 文件到 `briefings/`
 - 自动记录运行日志到 `logs/`
@@ -31,8 +33,11 @@ a_stock_morning_brief/
     watchlist.yaml
     sources.yaml
   prompts/
+    research_collection_prompt.txt
+    signal_filter_prompt.txt
     morning_brief_prompt.txt
     deepseek_refine_prompt.txt
+    quality_fix_prompt.txt
     wechat_summary_prompt.txt
   src/
     main.py
@@ -41,6 +46,7 @@ a_stock_morning_brief/
     deepseek_client.py
     market_data.py
     brief_generator.py
+    quality_checker.py
     file_writer.py
     notifier.py
     utils.py
@@ -215,6 +221,40 @@ DeepSeek 使用：
 ```text
 https://api.deepseek.com
 ```
+
+## 多阶段研究流程
+
+默认启用多阶段研究，配置在 `config/settings.yaml`：
+
+```yaml
+search:
+  enable_multistage_research: true
+```
+
+运行顺序：
+
+1. `research_collection_prompt.txt`：按外围、政策、板块、公告、资金和持仓收集事实。
+2. `signal_filter_prompt.txt`：剔除旧消息、弱相关消息和无来源消息。
+3. `morning_brief_prompt.txt`：基于过滤后的信号生成最终简报。
+4. `quality_checker.py`：检查栏目、板块数量、外围市场表格、持仓覆盖、来源数量和违规词。
+5. `quality_fix_prompt.txt`：如果不达标，自动修订一次。
+
+## 简报质量检查配置
+
+编辑 `config/settings.yaml`：
+
+```yaml
+quality:
+  enable_quality_check: true
+  auto_fix: true
+  max_fix_attempts: 1
+  min_sections: 9
+  min_global_market_rows: 8
+  min_sector_count: 5
+  min_source_count: 5
+```
+
+如果简报不足 5 个板块、未覆盖持仓股、来源太少或出现确定性投资表述，系统会自动尝试修订。
 
 ## 关闭 DeepSeek 二次优化
 

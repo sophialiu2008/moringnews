@@ -25,12 +25,31 @@ class LLMClient:
         self.primary_max_tokens = generation_settings.get("primary_max_tokens", 6000)
         self.secondary_max_tokens = generation_settings.get("secondary_max_tokens", 6000)
         self.summary_max_tokens = generation_settings.get("summary_max_tokens", 1800)
+        self.research_max_tokens = generation_settings.get("research_max_tokens", 6000)
+        self.filter_max_tokens = generation_settings.get("filter_max_tokens", 5000)
+        self.quality_fix_max_tokens = generation_settings.get("quality_fix_max_tokens", 6000)
 
         primary_model = llm_settings.get("primary_model", "qwen-max")
         secondary_model = llm_settings.get("secondary_model", "deepseek-chat")
 
         self.bailian = BailianClient(model=primary_model, max_tokens=self.primary_max_tokens)
         self.deepseek = DeepSeekClient(model=secondary_model, max_tokens=self.secondary_max_tokens)
+
+    def collect_research_notes(self, prompt: str) -> str:
+        return self.bailian.chat(
+            prompt,
+            system_prompt="你是严谨的 A股盘前资料收集员。只收集事实和来源，不输出交易建议。",
+            enable_search=self.enable_web_search,
+            max_tokens=self.research_max_tokens,
+        )
+
+    def filter_signals(self, prompt: str) -> str:
+        return self.bailian.chat(
+            prompt,
+            system_prompt="你是严谨的 A股盘前信号过滤员。只保留有来源、有时间、有交易意义的信息。",
+            enable_search=False,
+            max_tokens=self.filter_max_tokens,
+        )
 
     def generate_initial_brief(self, prompt: str) -> str:
         return self.bailian.chat(
@@ -59,6 +78,14 @@ class LLMClient:
         except Exception as exc:
             self.logger.warning("DeepSeek 二次优化失败，将使用阿里百炼初稿。错误：%s", exc)
             return brief
+
+    def fix_brief_quality(self, prompt: str) -> str:
+        return self.bailian.chat(
+            prompt,
+            system_prompt="你是 A股盘前简报质检修订员。只修复结构和依据不足问题，不编造数据。",
+            enable_search=False,
+            max_tokens=self.quality_fix_max_tokens,
+        )
 
     def summarize_for_wechat(self, brief: str) -> str:
         prompt = self.wechat_summary_template.format(brief=brief)

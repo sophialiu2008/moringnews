@@ -31,3 +31,41 @@ global_sources:
     url: https://www.investing.com/
   - name: MarketWatch
     url: https://www.marketwatch.com/
+
+daily_checks:
+  - name: 隔夜外围市场
+    category: global_market
+    priority: high
+    query: "最近24小时 美股三大指数 纳斯达克 中概股 富时中国A50 离岸人民币 美元指数 美债收益率 原油 黄金 铜 对A股影响"
+  - name: 海外科技龙头
+    category: global_tech
+    priority: high
+    query: "最近24小时 英伟达 AMD 台积电 苹果 微软 特斯拉 重要消息 AI算力 半导体 消费电子 A股映射"
+  - name: 国内政策监管
+    category: policy
+    priority: high
+    query: "最近24小时 国务院 发改委 工信部 财政部 央行 证监会 交易所 A股 政策 监管"
+  - name: 交易所公告风险
+    category: announcements
+    priority: high
+    query: "最近24小时 A股 减持 解禁 问询函 监管函 停复牌 业绩预告 并购重组 重大合同 中标"
+  - name: 科技成长催化
+    category: sectors
+    priority: high
+    query: "最近24小时 A股 AI算力 半导体 人形机器人 低空经济 数据要素 消费电子 板块催化"
+  - name: 周期和高股息
+    category: sectors
+    priority: medium
+    query: "最近24小时 A股 有色金属 煤炭 化工 钢铁 高股息 券商 房地产 板块催化 风险"
+  - name: 资金和市场情绪
+    category: sentiment
+    priority: high
+    query: "A股 昨日 涨停 跌停 连板高度 龙虎榜 ETF资金 融资融券 成交量 市场情绪"
+  - name: 持仓股公告检查
+    category: holdings
+    priority: high
+    query: "最近24小时 固高科技 富满微 汉威科技 公告 减持 解禁 监管 问询 业绩 风险"
+  - name: 关注股催化检查
+    category: watch_stocks
+    priority: medium
+    query: "最近24小时 中际旭创 新易盛 中芯国际 科大讯飞 公告 产业消息 业绩 风险"
