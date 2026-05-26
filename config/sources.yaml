@@ -1,0 +1,33 @@
+official_sources:
+  - name: 证监会
+    url: https://www.csrc.gov.cn/
+  - name: 上海证券交易所
+    url: https://www.sse.com.cn/
+  - name: 深圳证券交易所
+    url: https://www.szse.cn/
+  - name: 中国人民银行
+    url: https://www.pbc.gov.cn/
+  - name: 国家发展改革委
+    url: https://www.ndrc.gov.cn/
+  - name: 工信部
+    url: https://www.miit.gov.cn/
+
+market_sources:
+  - name: 东方财富
+    url: https://www.eastmoney.com/
+  - name: 财联社
+    url: https://www.cls.cn/
+  - name: 同花顺财经
+    url: https://www.10jqka.com.cn/
+  - name: 新浪财经
+    url: https://finance.sina.com.cn/
+  - name: 证券时报
+    url: https://www.stcn.com/
+
+global_sources:
+  - name: CNBC
+    url: https://www.cnbc.com/
+  - name: Investing
+    url: https://www.investing.com/
+  - name: MarketWatch
+    url: https://www.marketwatch.com/

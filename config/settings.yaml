@@ -1,0 +1,31 @@
+app:
+  timezone: Asia/Shanghai
+  output_dir: briefings
+  log_dir: logs
+
+llm:
+  primary_provider: bailian
+  primary_model: qwen-max
+  secondary_provider: deepseek
+  secondary_model: deepseek-chat
+  enable_deepseek_refine: true
+
+search:
+  enable_web_search: true
+  time_range_hours: 24
+
+brief:
+  language: zh-CN
+  max_reading_minutes: 5
+  filename_format: "{date}-A股盘前简报.md"
+
+notification:
+  enable_wechat: true
+  provider_priority:
+    - serverchan
+    - wxpusher
+  push_full_text: false
+
+market:
+  enable_akshare: false
+  enable_tushare: false

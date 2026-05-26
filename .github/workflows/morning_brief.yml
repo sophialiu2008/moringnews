@@ -1,0 +1,46 @@
+name: A股每日盘前简报
+
+on:
+  schedule:
+    - cron: "30 8 * * 1-5"
+      timezone: "Asia/Shanghai"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  morning-brief:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 拉取代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 安装依赖
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 生成 A股盘前简报并推送微信
+        env:
+          DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          SERVERCHAN_SENDKEY: ${{ secrets.SERVERCHAN_SENDKEY }}
+          WXPUSHER_APP_TOKEN: ${{ secrets.WXPUSHER_APP_TOKEN }}
+          WXPUSHER_UID: ${{ secrets.WXPUSHER_UID }}
+        run: |
+          python src/main.py
+
+      - name: 提交生成结果
+        run: |
+          git config user.name "a-stock-brief-bot"
+          git config user.email "bot@example.com"
+          git add briefings/ logs/
+          git commit -m "add daily A-share morning brief" || echo "No changes to commit"
+          git push
