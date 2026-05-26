@@ -6,7 +6,7 @@
 
 ## 功能列表
 
-- 周一到周五北京时间 08:30 自动生成盘前简报
+- 周一到周五北京时间 06:50 自动生成盘前简报
 - 阿里百炼 OpenAI 兼容模式调用，默认模型 `qwen-max`
 - 百炼主模型优先启用 `enable_search`
 - `enable_search` 失败时自动降级普通模型调用
@@ -141,7 +141,7 @@ python src/main.py
 
 ```yaml
 schedule:
-  - cron: "30 8 * * 1-5"
+  - cron: "50 6 * * 1-5"
     timezone: "Asia/Shanghai"
 ```
 
@@ -149,10 +149,10 @@ GitHub 官方文档已支持 `timezone` 字段，因此这里直接使用北京�
 
 ```yaml
 schedule:
-  - cron: "30 0 * * 1-5"
+  - cron: "50 22 * * 0-4"
 ```
 
-`00:30 UTC` 对应北京时间 `08:30`。
+`22:50 UTC` 对应次日北京时间 `06:50`，所以周日到周四 UTC 运行，对应北京时间周一到周五早上。
 
 ## 手动触发 GitHub Actions
 

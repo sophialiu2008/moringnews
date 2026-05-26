@@ -2,7 +2,7 @@ name: A股每日盘前简报
 
 on:
   schedule:
-    - cron: "30 8 * * 1-5"
+    - cron: "50 6 * * 1-5"
       timezone: "Asia/Shanghai"
   workflow_dispatch:
 
