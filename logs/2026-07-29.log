@@ -1,0 +1,40 @@
+2026-07-28 23:43:03 [INFO] a_stock_morning_brief - 开始运行 A股每日盘前情报简报系统，日期：2026-07-29
+2026-07-28 23:43:03 [INFO] a_stock_morning_brief - 开始分阶段研究：收集盘前资料。
+2026-07-28 23:43:03 [INFO] a_stock_morning_brief - 调用阿里百炼模型：qwen-max，enable_search=True
+2026-07-28 23:43:36 [INFO] a_stock_morning_brief - 开始分阶段研究：过滤有效信号。
+2026-07-28 23:43:36 [INFO] a_stock_morning_brief - 调用阿里百炼模型：qwen-max，普通模式
+2026-07-28 23:44:01 [INFO] a_stock_morning_brief - 开始生成 A股盘前简报初稿。
+2026-07-28 23:44:01 [INFO] a_stock_morning_brief - 调用阿里百炼模型：qwen-max，enable_search=True
+2026-07-28 23:44:53 [INFO] a_stock_morning_brief - 开始执行可选 DeepSeek 二次优化。
+2026-07-28 23:44:53 [INFO] a_stock_morning_brief - 调用 DeepSeek 模型：deepseek-chat
+2026-07-28 23:44:54 [WARNING] a_stock_morning_brief - DeepSeek 二次优化失败，将使用阿里百炼初稿。错误：DeepSeek 模型调用失败：Connection error.
+2026-07-28 23:44:54 [WARNING] a_stock_morning_brief - 简报质量检查未通过：质量检查未通过：
+- 信息来源数量不足，当前 3 条，要求至少 5 条。
+
+检测指标：
+- sections: 9
+- global_market_rows: 10
+- sector_count: 5
+- missing_holdings: 0
+- source_count: 3
+- forbidden_words: 0
+2026-07-28 23:44:54 [INFO] a_stock_morning_brief - 开始自动修订简报质量，第 1 次。
+2026-07-28 23:44:54 [INFO] a_stock_morning_brief - 调用阿里百炼模型：qwen-max，普通模式
+2026-07-28 23:45:42 [WARNING] a_stock_morning_brief - 自动修订后仍未完全通过：质量检查未通过：
+- 信息来源数量不足，当前 4 条，要求至少 5 条。
+
+检测指标：
+- sections: 9
+- global_market_rows: 10
+- sector_count: 7
+- missing_holdings: 0
+- source_count: 4
+- forbidden_words: 0
+2026-07-28 23:45:42 [INFO] a_stock_morning_brief - 开始生成微信推送摘要。
+2026-07-28 23:45:42 [INFO] a_stock_morning_brief - 调用 DeepSeek 模型：deepseek-chat
+2026-07-28 23:45:43 [WARNING] a_stock_morning_brief - DeepSeek 微信摘要生成失败，将改用阿里百炼。错误：DeepSeek 模型调用失败：Connection error.
+2026-07-28 23:45:43 [INFO] a_stock_morning_brief - 调用阿里百炼模型：qwen-max，普通模式
+2026-07-28 23:45:53 [INFO] a_stock_morning_brief - 简报已保存：/home/runner/work/moringnews/moringnews/briefings/2026-07-29-A股盘前简报.md
+2026-07-28 23:45:55 [INFO] a_stock_morning_brief - Server酱推送成功。
+2026-07-28 23:45:55 [INFO] a_stock_morning_brief - 微信推送结果：成功
+2026-07-28 23:45:55 [INFO] a_stock_morning_brief - 运行完成。简报路径：/home/runner/work/moringnews/moringnews/briefings/2026-07-29-A股盘前简报.md
