@@ -1,0 +1,19 @@
+2026-08-04 23:44:38 [INFO] a_stock_morning_brief - 开始运行 A股每日盘前情报简报系统，日期：2026-08-05
+2026-08-04 23:44:38 [INFO] a_stock_morning_brief - 开始分阶段研究：收集盘前资料。
+2026-08-04 23:44:38 [INFO] a_stock_morning_brief - 调用阿里百炼模型：qwen-max，enable_search=True
+2026-08-04 23:45:02 [INFO] a_stock_morning_brief - 开始分阶段研究：过滤有效信号。
+2026-08-04 23:45:02 [INFO] a_stock_morning_brief - 调用阿里百炼模型：qwen-max，普通模式
+2026-08-04 23:45:34 [INFO] a_stock_morning_brief - 开始生成 A股盘前简报初稿。
+2026-08-04 23:45:34 [INFO] a_stock_morning_brief - 调用阿里百炼模型：qwen-max，enable_search=True
+2026-08-04 23:46:33 [INFO] a_stock_morning_brief - 开始执行可选 DeepSeek 二次优化。
+2026-08-04 23:46:33 [INFO] a_stock_morning_brief - 调用 DeepSeek 模型：deepseek-chat
+2026-08-04 23:46:35 [WARNING] a_stock_morning_brief - DeepSeek 二次优化失败，将使用阿里百炼初稿。错误：DeepSeek 模型调用失败：Connection error.
+2026-08-04 23:46:35 [INFO] a_stock_morning_brief - 简报质量检查通过：{'sections': 9, 'global_market_rows': 9, 'sector_count': 5, 'missing_holdings': 0, 'source_count': 8, 'forbidden_words': 0}
+2026-08-04 23:46:35 [INFO] a_stock_morning_brief - 开始生成微信推送摘要。
+2026-08-04 23:46:35 [INFO] a_stock_morning_brief - 调用 DeepSeek 模型：deepseek-chat
+2026-08-04 23:46:36 [WARNING] a_stock_morning_brief - DeepSeek 微信摘要生成失败，将改用阿里百炼。错误：DeepSeek 模型调用失败：Connection error.
+2026-08-04 23:46:36 [INFO] a_stock_morning_brief - 调用阿里百炼模型：qwen-max，普通模式
+2026-08-04 23:46:56 [INFO] a_stock_morning_brief - 简报已保存：/home/runner/work/moringnews/moringnews/briefings/2026-08-05-A股盘前简报.md
+2026-08-04 23:46:58 [INFO] a_stock_morning_brief - Server酱推送成功。
+2026-08-04 23:46:58 [INFO] a_stock_morning_brief - 微信推送结果：成功
+2026-08-04 23:46:58 [INFO] a_stock_morning_brief - 运行完成。简报路径：/home/runner/work/moringnews/moringnews/briefings/2026-08-05-A股盘前简报.md
